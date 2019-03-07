@@ -24,6 +24,11 @@ class HomeScreen extends Component<Props> {
             title="Fetch"
             onPress={() => navigate("Fetch")}
           />
+          <Button
+            style={bodyStyles.button}
+            title="Secure KeyStore"
+            onPress={() => navigate("Keystore")}
+          />
         </View>
       </View>
     );

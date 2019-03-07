@@ -11,10 +11,12 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import HomeScreen from "./screens/HomeScreen";
 import FetchScreen from "./screens/FetchScreen";
+import KeystoreScreen from "./screens/KeystoreScreen";
 
 const MainNavigator = createStackNavigator({
   Home: { screen: HomeScreen },
-  Fetch: { screen: FetchScreen }
+  Fetch: { screen: FetchScreen },
+  Keystore: { screen: KeystoreScreen }
 });
 
 const App = createAppContainer(MainNavigator);
