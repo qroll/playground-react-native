@@ -1,4 +1,4 @@
-package com.playground;
+package com.qwissroll.playground;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

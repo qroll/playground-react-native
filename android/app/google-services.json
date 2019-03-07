@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "930165237246",
+    "firebase_url": "https://playground-d8bf4.firebaseio.com",
+    "project_id": "playground-d8bf4",
+    "storage_bucket": "playground-d8bf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930165237246:android:530e8d60662ec298",
+        "android_client_info": {
+          "package_name": "com.qwissroll.playground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930165237246-c6mq6991uaakrsflam8o9e8jpv5luc71.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcOQ1MGwaDCy8vsuwJDtEAqBt_hakfw94"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -28,10 +28,15 @@ class KeystoreScreen extends Component {
   };
 
   state = {
+    key: "",
     value: "",
     error: null,
     setResult: null,
     getResult: null
+  };
+
+  handleOnKeyChange = key => {
+    this.setState({ key });
   };
 
   handleOnChange = value => {
@@ -39,7 +44,7 @@ class KeystoreScreen extends Component {
   };
 
   handleOnPress = async () => {
-    let key = "key1";
+    let key = this.state.key;
     let value = this.state.value;
     try {
       let setResult = await RNSecureKeyStore.set(key, value, {
@@ -54,10 +59,15 @@ class KeystoreScreen extends Component {
   };
 
   render() {
-    let { setResult, error, value, getResult } = this.state;
+    let { setResult, error, key, value, getResult } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView>
+          <TextInput
+            style={styles.input}
+            value={key}
+            onChangeText={this.handleOnKeyChange}
+          />
           <TextInput
             style={styles.input}
             value={value}

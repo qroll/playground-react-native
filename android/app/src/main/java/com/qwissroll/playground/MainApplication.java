@@ -1,6 +1,12 @@
-package com.playground;
+package com.qwissroll.playground;
 
 import android.app.Application;
+import android.util.Log;
+
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.security.ProviderInstaller;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
 import com.facebook.react.ReactApplication;
 import com.reactlibrary.securekeystore.RNSecureKeyStorePackage;
@@ -44,6 +50,18 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    try {
+      Log.i("MainApplication", "Installing GMS provider");
+      ProviderInstaller.installIfNeeded(this);
+    } catch (GooglePlayServicesRepairableException e) {
+      Log.e("MainApplication", "ProviderInstaller failed: Play Services is not installed, up-to-date, or enabled", e);
+      GoogleApiAvailability.getInstance().showErrorNotification(this, e.getConnectionStatusCode());
+    }
+    catch (GooglePlayServicesNotAvailableException e) {
+      Log.e("MainApplication", "ProviderInstaller failed: Play Services is not available", e);
+    } catch (Exception e) {
+      Log.e("MainApplication", "Unexpected error in installing Provider", e);
+    }
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
