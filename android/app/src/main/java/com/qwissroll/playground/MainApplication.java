@@ -32,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNSecureKeyStorePackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new RNProviderInstallerPackage()
       );
     }
 
@@ -50,18 +51,18 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    try {
-      Log.i("MainApplication", "Installing GMS provider");
-      ProviderInstaller.installIfNeeded(this);
-    } catch (GooglePlayServicesRepairableException e) {
-      Log.e("MainApplication", "ProviderInstaller failed: Play Services is not installed, up-to-date, or enabled", e);
-      GoogleApiAvailability.getInstance().showErrorNotification(this, e.getConnectionStatusCode());
-    }
-    catch (GooglePlayServicesNotAvailableException e) {
-      Log.e("MainApplication", "ProviderInstaller failed: Play Services is not available", e);
-    } catch (Exception e) {
-      Log.e("MainApplication", "Unexpected error in installing Provider", e);
-    }
+//    try {
+//      Log.i("MainApplication", "Installing GMS provider");
+//      ProviderInstaller.installIfNeeded(this);
+//    } catch (GooglePlayServicesRepairableException e) {
+//      Log.e("MainApplication", "ProviderInstaller failed: Play Services is not installed, up-to-date, or enabled", e);
+//      GoogleApiAvailability.getInstance().showErrorNotification(this, e.getConnectionStatusCode());
+//    }
+//    catch (GooglePlayServicesNotAvailableException e) {
+//      Log.e("MainApplication", "ProviderInstaller failed: Play Services is not available", e);
+//    } catch (Exception e) {
+//      Log.e("MainApplication", "Unexpected error in installing Provider", e);
+//    }
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

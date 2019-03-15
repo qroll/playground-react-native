@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import RNSecureKeyStore, { ACCESSIBLE } from "react-native-secure-key-store";
 
+import ProviderInstaller from "../utils/ProviderInstaller";
+
 formatResponse = response => {
   return JSON.stringify(response, null, 4);
 };
@@ -28,12 +30,19 @@ class KeystoreScreen extends Component {
   };
 
   state = {
-    key: "",
-    value: "",
+    key: "Test",
+    value: "Test",
     error: null,
     setResult: null,
     getResult: null
   };
+
+  async componentDidMount() {
+    let result = await ProviderInstaller.updateSecurityProvider();
+    console.log(result);
+
+    await RNSecureKeyStore.remove("Test");
+  }
 
   handleOnKeyChange = key => {
     this.setState({ key });

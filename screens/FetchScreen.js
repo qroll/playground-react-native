@@ -66,8 +66,7 @@ class FetchInfo extends Component {
   }
 }
 
-type Props = {};
-class FetchScreen extends Component<Props> {
+class FetchScreen extends Component {
   static navigationOptions = {
     title: "Fetch"
   };

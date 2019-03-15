@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
-type Props = {};
-class HomeScreen extends Component<Props> {
+class HomeScreen extends Component {
   static navigationOptions = {
     title: "Home"
   };
