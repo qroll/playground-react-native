@@ -7,17 +7,22 @@ buildscript {
         compileSdkVersion = 28
         targetSdkVersion = 27
         supportLibVersion = "28.0.0"
+        MARS_XLOG_VERSION_NAME='1.0.4'
+        MARS_XLOG_VERSION_NAME_SUFFIX = ''
     }
     repositories {
         google()
         jcenter()
         maven {
             url 'https://maven.google.com/'
+            url 'https://maven.fabric.io/public'
         }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'com.google.gms:google-services:4.0.1'
+
+        classpath 'io.fabric.tools:gradle:1.25.4'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

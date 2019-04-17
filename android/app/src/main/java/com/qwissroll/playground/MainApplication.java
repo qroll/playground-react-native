@@ -1,6 +1,7 @@
 package com.qwissroll.playground;
 
 import android.app.Application;
+import android.os.Environment;
 import android.util.Log;
 
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -9,6 +10,13 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage;
+import com.chirag.RNMail.RNMail;
+import com.engsshi.xlog.XLogModule;
+import com.engsshi.xlog.XLogPackage;
+import com.engsshi.xlog.XLogSetting;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactlibrary.securekeystore.RNSecureKeyStorePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -31,9 +39,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
+            new RNMail(),
+            new XLogPackage(),
+            new RNFetchBlobPackage(),
             new RNSecureKeyStorePackage(),
             new RNGestureHandlerPackage(),
-            new RNProviderInstallerPackage()
+            new RNProviderInstallerPackage(),
+            new RNFirebaseCrashlyticsPackage()
       );
     }
 
@@ -63,6 +76,22 @@ public class MainApplication extends Application implements ReactApplication {
 //    } catch (Exception e) {
 //      Log.e("MainApplication", "Unexpected error in installing Provider", e);
 //    }
+
+    final String appName = "com.qwissroll.playground";
+    final String logPath = getFilesDir().getAbsolutePath() + "/logs";
+
+    Log.i("MyApp", "logPath: " + logPath);
+
+    XLogSetting xLogSetting = XLogSetting.builder()
+      .setLevel(XLogSetting.LEVEL_DEBUG)
+      .setPath(logPath)
+      .setCacheDir("")
+      .setAppenderMode(XLogSetting.APPENDER_MODE_ASYNC)
+      .setNamePrefix(appName)
+      .setOpenConsoleLog(true)
+      .build();
+    XLogModule.initWithNativeCrashInclude(xLogSetting, this);
+
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

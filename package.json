@@ -11,9 +11,14 @@
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.58.4",
+    "react-native-file-provider": "^1.1.0",
+    "react-native-firebase": "^5.3.1",
     "react-native-gesture-handler": "^1.0.15",
+    "react-native-mail": "git+https://github.com/qroll/react-native-mail.git",
     "react-native-secure-key-store": "^2.0.1",
-    "react-navigation": "^3.1.5"
+    "react-native-xlog": "^0.6.1",
+    "react-navigation": "^3.1.5",
+    "rn-fetch-blob": "^0.10.15"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",

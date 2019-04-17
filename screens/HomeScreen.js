@@ -33,6 +33,11 @@ class HomeScreen extends Component {
             title="Error Boundaries"
             onPress={() => navigate("Error")}
           />
+          <Button
+            style={bodyStyles.button}
+            title="File Attachment"
+            onPress={() => navigate("File")}
+          />
         </View>
       </View>
     );
