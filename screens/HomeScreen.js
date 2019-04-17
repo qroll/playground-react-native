@@ -28,6 +28,11 @@ class HomeScreen extends Component {
             title="Secure KeyStore"
             onPress={() => navigate("Keystore")}
           />
+          <Button
+            style={bodyStyles.button}
+            title="Error Boundaries"
+            onPress={() => navigate("Error")}
+          />
         </View>
       </View>
     );
