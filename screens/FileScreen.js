@@ -3,25 +3,71 @@ import { Platform, StyleSheet, Text, View, Button } from "react-native";
 import Xlog from "react-native-xlog";
 import rnFetchBlob from "rn-fetch-blob";
 import Mailer from "react-native-mail";
+import firebase from "react-native-firebase";
 
 const fs = rnFetchBlob.fs;
 
 class FileScreen extends Component {
-  async componentDidMount() {
-    await Xlog.open();
-    await Xlog.info("File", "This was logged in componentDidMount");
-  }
+  state = {
+    actions: [],
+    counter: 0
+  };
+
+  open = async () => {
+    this.setState(prevState => {
+      let count = prevState.counter + 1;
+      Xlog.open();
+
+      return {
+        counter: count,
+        actions: prevState.actions.concat("open " + count)
+      };
+    });
+  };
+
+  close = async () => {
+    this.setState(prevState => {
+      let count = prevState.counter + 1;
+      Xlog.close();
+
+      return {
+        counter: count,
+        actions: prevState.actions.concat("close " + count)
+      };
+    });
+  };
+
+  log = async () => {
+    this.setState(prevState => {
+      let count = prevState.counter + 1;
+      Xlog.info("File", "This was logged " + count);
+
+      return {
+        counter: count,
+        actions: prevState.actions.concat("log " + count)
+      };
+    });
+  };
+
+  forceCrash = () => {
+    this.setState(prevState => {
+      let count = prevState.counter + 1;
+      return {
+        counter: count,
+        actions: prevState.actions.concat("crash " + count)
+      };
+    });
+    firebase.crashlytics().crash();
+  };
 
   handleOnPress = async () => {
-    await Xlog.info("File", "This was logged in handleOnPress");
-    // await Xlog.close();
     let files = await fs.ls(fs.dirs.DocumentDir + "/logs");
     console.log(">>> files", files);
 
-    let content = await fs.readFile(
-      fs.dirs.DocumentDir + "/logs/com.qwissroll.playground_20190417.xlog"
-    );
-    console.log(">>> content", content);
+    // let content = await fs.readFile(
+    //   fs.dirs.DocumentDir + "/logs/com.qwissroll.playground_20190417.xlog"
+    // );
+    // console.log(">>> content", content);
 
     let recipients = ["quek.ruoling@gmail.com"];
     let options = {
@@ -46,7 +92,28 @@ class FileScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="Email" onPress={this.handleOnPress} />
+        <View style={styles.actions}>
+          {this.state.actions.map((action, index) => (
+            <View key={index}>
+              <Text>{action}</Text>
+            </View>
+          ))}
+        </View>
+        <View style={styles.buttons}>
+          <Button style={styles.button} title="Open" onPress={this.open} />
+          <Button style={styles.button} title="Close" onPress={this.close} />
+          <Button style={styles.button} title="Log" onPress={this.log} />
+          <Button
+            style={styles.button}
+            title="Crash"
+            onPress={this.forceCrash}
+          />
+          <Button
+            style={styles.button}
+            title="Email"
+            onPress={this.handleOnPress}
+          />
+        </View>
       </View>
     );
   }
@@ -58,6 +125,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF"
+  },
+  actions: {
+    flex: 2
+  },
+  buttons: {
+    flex: 0,
+    flexDirection: "row",
+    paddingBottom: 48
+  },
+  button: {
+    margin: 16
   }
 });
 
