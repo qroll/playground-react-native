@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import NotificationManager from "../utils/NotificationManager";
 
 class HomeScreen extends Component {
   static navigationOptions = {
     title: "Home"
   };
+
+  componentDidMount() {
+    NotificationManager.init();
+    NotificationManager.initializeNewSession(() => {
+      console.log(">>> callback was called wooo woo");
+    }, "PARENTID");
+  }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -37,6 +45,28 @@ class HomeScreen extends Component {
             style={bodyStyles.button}
             title="File Attachment"
             onPress={() => navigate("File")}
+          />
+          <Button
+            style={bodyStyles.button}
+            title="Push Notifications"
+            onPress={() => navigate("PushNotification")}
+          />
+          <Button
+            style={bodyStyles.button}
+            title="Subscribe Push Notifications"
+            onPress={() =>
+              NotificationManager.initializeNewSession(() => {
+                console.log(">>> callback was called from subscribe!");
+              }, "PARENTID")
+            }
+          />
+          <Button
+            style={bodyStyles.button}
+            title="Unsubscribe Push Notifications"
+            onPress={() => {
+              NotificationManager.unintializeSession();
+              NotificationManager.getPushPermission();
+            }}
           />
         </View>
       </View>

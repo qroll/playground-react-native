@@ -14,13 +14,15 @@ import FetchScreen from "./screens/FetchScreen";
 import KeystoreScreen from "./screens/KeystoreScreen";
 import ErrorScreen from "./screens/ErrorScreen";
 import FileScreen from "./screens/FileScreen";
+import PushNotificationScreen from "./screens/PushNotificationScreen";
 
 const MainNavigator = createStackNavigator({
   Home: { screen: HomeScreen },
   Fetch: { screen: FetchScreen },
   Keystore: { screen: KeystoreScreen },
   Error: { screen: ErrorScreen },
-  File: { screen: FileScreen }
+  File: { screen: FileScreen },
+  PushNotification: { screen: PushNotificationScreen }
 });
 
 const App = createAppContainer(MainNavigator);

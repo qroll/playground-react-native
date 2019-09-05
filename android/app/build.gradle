@@ -138,17 +138,20 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-file-provider')
+    implementation project(':react-native-aes-kit')
     implementation project(':react-native-firebase')
     implementation project(':react-native-mail')
-    implementation project(':react-native-xlog')
     implementation project(':rn-fetch-blob')
-    implementation "com.google.android.gms:play-services-base:+"
+    implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-analytics:16.3.0'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
     implementation project(':react-native-secure-key-store')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    implementation "com.facebook.react:react-native:0.58.4"  // From node_modules
+    implementation "com.facebook.react:react-native:0.59.10"  // From node_modules
 
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true

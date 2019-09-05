@@ -5,29 +5,45 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:ios": "react-native run-ios",
+    "start:ios:device": "npm run start:ios -- --device",
     "start:android": "react-native run-android",
-    "test": "jest"
+    "build:android": "./android/.gradlew assembleRelease && adb install ./android/app/build/outputs/apk/release/app-release.apk",
+    "test": "jest",
+    "postinstall": "react-native-schemes-manager all"
   },
   "dependencies": {
-    "react": "16.6.3",
-    "react-native": "0.58.4",
+    "lodash": "^4.17.15",
+    "react": "^16.8.6",
+    "react-native": "^0.59.10",
+    "react-native-aes-kit": "^1.0.2",
     "react-native-file-provider": "^1.1.0",
     "react-native-firebase": "^5.3.1",
     "react-native-gesture-handler": "^1.0.15",
     "react-native-mail": "git+https://github.com/qroll/react-native-mail.git",
     "react-native-secure-key-store": "^2.0.1",
-    "react-native-xlog": "^0.6.1",
     "react-navigation": "^3.1.5",
     "rn-fetch-blob": "^0.10.15"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.1.0",
+    "firebase-admin": "^8.2.0",
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.51.1",
+    "react-native-schemes-manager": "^2.0.0",
     "react-test-renderer": "16.6.3"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "xcodeSchemes": {
+    "Debug": [
+      "Debug"
+    ],
+    "Release": [
+      "Release"
+    ],
+    "projectDirectory": "ios",
+    "settings": {}
   }
 }

@@ -1,6 +1,10 @@
 package com.qwissroll.playground;
 
 import android.app.Application;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
@@ -10,11 +14,14 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
 import com.facebook.react.ReactApplication;
+import com.artirigo.fileprovider.RNFileProviderPackage;
+import cc.rocwang.aescrypto.AesCryptoPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.chirag.RNMail.RNMail;
 import com.engsshi.xlog.XLogModule;
-import com.engsshi.xlog.XLogPackage;
 import com.engsshi.xlog.XLogSetting;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactlibrary.securekeystore.RNSecureKeyStorePackage;
@@ -39,14 +46,17 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFileProviderPackage(),
+            new AesCryptoPackage(),
             new RNFirebasePackage(),
             new RNMail(),
-            new XLogPackage(),
             new RNFetchBlobPackage(),
             new RNSecureKeyStorePackage(),
             new RNGestureHandlerPackage(),
             new RNProviderInstallerPackage(),
-            new RNFirebaseCrashlyticsPackage()
+            new RNFirebaseCrashlyticsPackage(),
+            new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage()
       );
     }
 
@@ -64,6 +74,15 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+
+   JobScheduler jobScheduler =
+           (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+   jobScheduler.schedule(new JobInfo.Builder(591314444,
+           new ComponentName(this, PlaygroundService.class))
+           .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+           .setMinimumLatency(1000 * 60 * 1)
+           .build());
+
 //    try {
 //      Log.i("MainApplication", "Installing GMS provider");
 //      ProviderInstaller.installIfNeeded(this);

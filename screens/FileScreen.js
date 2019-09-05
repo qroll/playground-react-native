@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Button } from "react-native";
-import Xlog from "react-native-xlog";
+// import Xlog from "react-native-xlog";
 import rnFetchBlob from "rn-fetch-blob";
 import Mailer from "react-native-mail";
 import firebase from "react-native-firebase";
@@ -16,7 +16,7 @@ class FileScreen extends Component {
   open = async () => {
     this.setState(prevState => {
       let count = prevState.counter + 1;
-      Xlog.open();
+      // Xlog.open();
 
       return {
         counter: count,
@@ -28,7 +28,7 @@ class FileScreen extends Component {
   close = async () => {
     this.setState(prevState => {
       let count = prevState.counter + 1;
-      Xlog.close();
+      // Xlog.close();
 
       return {
         counter: count,
@@ -40,7 +40,7 @@ class FileScreen extends Component {
   log = async () => {
     this.setState(prevState => {
       let count = prevState.counter + 1;
-      Xlog.info("File", "This was logged " + count);
+      // Xlog.info("File", "This was logged " + count);
 
       return {
         counter: count,
