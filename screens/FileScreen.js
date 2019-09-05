@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Button } from "react-native";
-// import Xlog from "react-native-xlog";
 import rnFetchBlob from "rn-fetch-blob";
 import Mailer from "react-native-mail";
 import firebase from "react-native-firebase";
@@ -16,7 +15,7 @@ class FileScreen extends Component {
   open = async () => {
     this.setState(prevState => {
       let count = prevState.counter + 1;
-      // Xlog.open();
+      // init log file here
 
       return {
         counter: count,
@@ -28,7 +27,7 @@ class FileScreen extends Component {
   close = async () => {
     this.setState(prevState => {
       let count = prevState.counter + 1;
-      // Xlog.close();
+      // close log stream here
 
       return {
         counter: count,
@@ -40,7 +39,7 @@ class FileScreen extends Component {
   log = async () => {
     this.setState(prevState => {
       let count = prevState.counter + 1;
-      // Xlog.info("File", "This was logged " + count);
+      // log to file here
 
       return {
         counter: count,
@@ -65,7 +64,7 @@ class FileScreen extends Component {
     console.log(">>> files", files);
 
     // let content = await fs.readFile(
-    //   fs.dirs.DocumentDir + "/logs/com.qwissroll.playground_20190417.xlog"
+    //   fs.dirs.DocumentDir + "/logs/com.qwissroll.playground_20190417.log"
     // );
     // console.log(">>> content", content);
 
@@ -76,9 +75,9 @@ class FileScreen extends Component {
       body: "Ayyy lmao",
       attachment: {
         path:
-          fs.dirs.DocumentDir + "/logs/com.qwissroll.playground_20190417.xlog",
+          fs.dirs.DocumentDir + "/logs/com.qwissroll.playground_20190417.log",
         type: "text",
-        name: "log.xlog"
+        name: "debug.log"
       }
     };
 

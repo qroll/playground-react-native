@@ -21,8 +21,6 @@ import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.chirag.RNMail.RNMail;
-import com.engsshi.xlog.XLogModule;
-import com.engsshi.xlog.XLogSetting;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactlibrary.securekeystore.RNSecureKeyStorePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -95,21 +93,6 @@ public class MainApplication extends Application implements ReactApplication {
 //    } catch (Exception e) {
 //      Log.e("MainApplication", "Unexpected error in installing Provider", e);
 //    }
-
-    final String appName = "com.qwissroll.playground";
-    final String logPath = getFilesDir().getAbsolutePath() + "/logs";
-
-    Log.i("MyApp", "logPath: " + logPath);
-
-    XLogSetting xLogSetting = XLogSetting.builder()
-      .setLevel(XLogSetting.LEVEL_DEBUG)
-      .setPath(logPath)
-      .setCacheDir("")
-      .setAppenderMode(XLogSetting.APPENDER_MODE_ASYNC)
-      .setNamePrefix(appName)
-      .setOpenConsoleLog(true)
-      .build();
-    XLogModule.initWithNativeCrashInclude(xLogSetting, this);
 
     SoLoader.init(this, /* native exopackage */ false);
   }
